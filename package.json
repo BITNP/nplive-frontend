@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  },
+  "dependencies": {
+    "bulma": "^0.8.0",
+    "dplayer": "^1.25.0"
+  }
+}

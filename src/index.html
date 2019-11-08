@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>NPLive-网络开拓者协会</title>
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css" />
+    <!-- <style type="text/css">
+      #video_1 {
+        vertical-align: middle;
+        max-height: calc(100vh - 120px);
+        min-height: 200px;
+      }
+
+      #video_1.vjs-fullscreen {
+        max-height: none;
+        min-height: auto;
+      }
+    </style> -->
+  </head>
+  <body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="../assets/img/bitnpLogo.jpg" />
+          <!--             width="112"
+            height="28" -->
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navbarBasicExample"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            随便什么东西
+          </a>
+
+          <a class="navbar-item">
+            另外什么东西
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              更多
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                网协主页
+              </a>
+              <a class="navbar-item">
+                校园网反馈
+              </a>
+              <a class="navbar-item">
+                电脑诊所(乡)
+              </a>
+              <a class="navbar-item">
+                电脑诊所(村)
+              </a>
+              <hr class="navbar-divider" />
+              <a class="navbar-item">
+                提供反馈
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- <div class="back1">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="#"
+            ><img
+              src="../assets/img/Logo3.png"
+              class="img-responsive"
+              alt="NPLive_Logo"
+              width="200"
+              height="auto"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            id="navbarNavDropdown"
+            class="navbar-collapse collapse justify-content-end"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.bitnp.net">网协主页</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://jinshuju.net/f/hTNo5V"
+                  >校园网反馈</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="https://mp.weixin.qq.com/s/PD0fjKapwO14WI4JeHMBtQ"
+                  >电脑诊所(乡)</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="https://mp.weixin.qq.com/s/UIPXn4MGeR7jB40nh5XV1w"
+                  >电脑诊所(村)</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div> -->
+
+    <section class="section">
+      <div class="container">
+        <!-- <h1 class="title">Section</h1>
+        <h2 class="subtitle">
+          A simple container to divide your page into <strong>sections</strong>,
+          like the one you're currently reading
+        </h2> -->
+        <!--           id="videoElement"
+          class="video-js vjs-default-skin vjs-big-play-centered"
+          controls -->
+        <!-- <video
+
+          preload="none"
+          width="auto"
+          poster="../assets/img/cover.png"
+        ></video> -->
+
+    <div id="dplayer"></div>
+
+      </div>
+      
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="btn back3" style="cursor: default;">观看通道选项：</div>
+        <div class="btn-group" role="group" aria-label="Choose Quality">
+          <a
+            id="quality-original"
+            href="?channel=original"
+            class="btn btn-secondary"
+            >原画</a
+          >
+          <a id="quality-1080" href="?channel=1080" class="btn btn-secondary"
+            >1080P</a
+          >
+          <!-- <a href="?channel=1080M" class="btn btn-secondary">蓝光6M</a> -->
+          <!-- <a id="quality-1080L" href="?channel=1080L" class="btn btn-secondary">高清</a> -->
+          <a id="quality-720" href="?channel=720" class="btn btn-secondary"
+            >720P</a
+          >
+          <!-- <a href="phone.html" class="btn btn-secondary">手机备用</a> -->
+        </div>
+        <div class="alert alert-info" role="alert">
+          Tips:由于校园网(尤其是WiFi)较为拥堵，若视频卡顿请选择较低画质进行观看。<br />
+          由于部分手机浏览器（如Sarafi）具有兼容性问题，若无法观看请选择“手机备用”频道或更换浏览器，敬请谅解。
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          Copyright© 2019 <strong>NetPioneer Association of BIT</strong>, All
+          Rights Reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="./main.js">
+    
+    // console.log(dp)
+    </script>
+
+    <script>
+      //   // if flv.js reports it is not supported, redirect to phone.html
+      //   if (!flvjs.isSupported()) {
+      //     window.location = "phone.html";
+      //   }
+      //   // 四个通道的地址
+      //   var flv_location = {
+      //     flv_720: "/nplive/livestream_720.flv",
+      //     flv_1080: "/nplive/livestream_1080.flv",
+      //     flv_original: "/nplive/livestream.flv"
+      //   };
+
+      //   // 当前选用的通道
+      //   var channel = getQueryString("channel");
+      //   var flv_selected;
+      //   if (channel) {
+      //     flv_selected = flv_location["flv_" + channel];
+      //   }
+      //   if (!flv_selected) {
+      //     channel = "original";
+      //     flv_selected = flv_location["flv_original"];
+      //   }
+
+      //   // 高亮按钮
+      //   var btn = document.getElementById("quality-" + channel);
+      //   if (btn) {
+      //     btn.classList.add("btn-primary");
+      //     btn.classList.remove("btn-secondary");
+      //   }
+
+      //   var player;
+
+      //   var element = document.getElementById("videoElement");
+
+      //   $("#videoElement").width(
+      //     $(".container")
+      //       .eq(1)
+      //       .width()
+      //   );
+      //   $("#videoElement").height(
+      //     ($(".container")
+      //       .eq(1)
+      //       .width() *
+      //       9) /
+      //       16
+      //   );
+
+      //   if (typeof player !== "undefined") {
+      //     if (player != null) {
+      //       player.unload();
+      //       player.detachMediaElement();
+      //       player.destroy();
+      //       player = null;
+      //     }
+      //   }
+
+      //   player = flvjs.createPlayer({
+      //     type: "flv",
+      //     isLive: true, // see https://github.com/bilibili/flv.js/blob/master/docs/livestream.md
+      //     url: flv_selected
+      //   });
+      //   player.attachMediaElement(element);
+      //   player.load();
+
+      //   console.log("isSupported: " + flvjs.isSupported());
+
+      //   function flv_start() {
+      //     player.play();
+      //   }
+
+      //   function flv_pause() {
+      //     player.pause();
+      //   }
+
+      //   function flv_destroy() {
+      //     player.pause();
+      //     player.unload();
+      //     player.detachMediaElement();
+      //     player.destroy();
+      //     player = null;
+      //   }
+
+      //   function flv_seekto() {
+      //     var input = document.getElementsByName("seekpoint")[0];
+      //     player.currentTime = parseFloat(input.value);
+      //   }
+
+      //   function getUrlParam(key, defaultValue) {
+      //     var pageUrl = window.location.search.substring(1);
+      //     var pairs = pageUrl.split("&");
+      //     for (var i = 0; i < pairs.length; i++) {
+      //       var keyAndValue = pairs[i].split("=");
+      //       if (keyAndValue[0] === key) {
+      //         return keyAndValue[1];
+      //       }
+      //     }
+      //     return defaultValue;
+      //   }
+
+      //   function getQueryString(name) {
+      //     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      //     var r = location.search.substr(1).match(reg);
+      //     if (r != null) return unescape(decodeURI(r[2]));
+      //     return null;
+      //   }
+    </script>
+  </body>
+</html>
