@@ -1,35 +1,67 @@
 import "../node_modules/dplayer/dist/DPlayer.min.css";
+import flvjs from "flv.js";
 import DPlayer from "dplayer";
+import Hls from "hls.js";
 
-let url = "https://www.moerats.com/usr/dplayer/xx.mp4";
-let id = "183f6653124c13ca6b924d021c233f52";
-
+const WS_URL = "ws://localhost:8888/websocket";
 let ws;
+
+let _flvPlayer = null;
+let last_send_time = new Date().getTime();
 
 const dp = new DPlayer({
   container: document.getElementById("dplayer"),
+  autoplay: true,
+  // screenshot: true,
+  // hotkey: true,
   video: {
-    url: url,
-    // pic: "assets/img/cover.png",
-
+    // url: url,
+    type: "customFlv",
+    customType: {
+      customFlv: function(video, player) {
+        if (_flvPlayer) {
+          console.log("destroy flvPlayer");
+          _flvPlayer.destroy();
+        }
+        const flvPlayer = flvjs.createPlayer({
+          type: "flv",
+          url: video.src
+        });
+        _flvPlayer = flvPlayer;
+        flvPlayer.attachMediaElement(video);
+        flvPlayer.load();
+        console.log("create flvPlayer");
+        console.log(flvPlayer);
+      },
+      customHls: function(video, player) {
+        const hls = new Hls();
+        hls.loadSource(video.src);
+        hls.attachMedia(video);
+      }
+    },
     quality: [
       {
-        name: "高清",
-        url: "https://www.moerats.com/usr/dplayer/xx.mp4"
+        name: "720P",
+        url: "http://live.bitnp.net/nplive/livestream_720.flv",
+        type: "customFlv"
       },
       {
-        name: "不清",
-        url: "https://www.moerats.com/usr/dplayer/xx.mp4"
+        name: "1080P",
+        url: "http://live.bitnp.net/nplive/livestream_1080.flv",
+        type: "customFlv"
       }
+      // {
+      //   name: "手机备用",
+      //   url: "http://live.bitnp.net/nplive/livestream_720-86.ts",
+      //   type: "customHls"
+      // }
     ],
     defaultQuality: 0
   },
   apiBackend: {
     read: function(options) {
-      console.log("Pretend to connect WebSocket");
-      console.log(options);
       try {
-        ws = new WebSocket("ws://localhost:8888/websocket");
+        ws = new WebSocket(WS_URL);
         options.success();
       } catch (e) {
         options.error();
@@ -37,34 +69,35 @@ const dp = new DPlayer({
     },
     send: function(options) {
       //   console.log("Pretend to send danamku via WebSocket", options);
-      ws.send(options.data.text);
-      // callback();
+      if (last_send_time + 3000 > new Date().getTime()) {
+        dp.notice("弹幕发送间隔要大于 3s 哦");
+        return;
+      }
+      const data = {
+        type: "danmaku",
+        data: {
+          text: options.data.text,
+          color: options.data.color,
+          type: options.data.type
+        }
+      };
+      last_send_time = new Date().getTime();
+      ws.send(JSON.stringify(data));
+      dp.notice("弹幕发送成功");
     }
   },
-  danmaku: true,
-  live: true,
-  lang: "zh-cn"
+  danmaku: {
+    maximum: 100,
+    bottom: "15%",
+    unlimited: true
+  },
+  live: true
 });
 
 ws.onmessage = function(e) {
-  const danamku = {
-    text: e.data,
-    color: "#fff",
-    type: "right"
-  };
-  dp.danmaku.draw(danamku);
+  const data = JSON.parse(e.data);
+  if (data.type === "danmaku") {
+    dp.danmaku.draw(data.data);
+  }
 };
-
-console.log(dp.danmaku);
-// setInterval(() => {
-//   dp.danmaku.send(
-//     {
-//       text: "dplayer is amazing",
-//       color: "#b7daff",
-//       type: "right" // should be `top` `bottom` or `right`
-//     },
-//     function() {
-//       console.log("success");
-//     }
-//   );
-// }, 3000);
+dp.danmaku.dan = dp.danmaku.dan.filter(v => v);
