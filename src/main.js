@@ -64,11 +64,16 @@ const dp = new DPlayer({
         ws = new WebSocket(WS_URL);
         options.success();
       } catch (e) {
+        dp.notice("弹幕暂时无法使用哦");
         options.error();
       }
     },
     send: function(options) {
       //   console.log("Pretend to send danamku via WebSocket", options);
+      if (options.data.text.length > 30) {
+        dp.notice("弹幕长度不要超过 30 字哦");
+        return;
+      }
       if (last_send_time + 3000 > new Date().getTime()) {
         dp.notice("弹幕发送间隔要大于 3s 哦");
         return;
