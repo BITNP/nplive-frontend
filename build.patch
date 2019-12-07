@@ -1,0 +1,13 @@
+diff --git a/src/main.js b/src/main.js
+index 3c9e80c..3d10f69 100644
+--- a/src/main.js
++++ b/src/main.js
+@@ -3,7 +3,7 @@ import flvjs from "flv.js";
+ import DPlayer from "dplayer";
+ import Hls from "hls.js";
+ 
+-const WS_URL = "ws://localhost:8888/websocket";
++const WS_URL = "ws://live.bitnp.net:8888/websocket";
+ let ws;
+ 
+ let _flvPlayer = null;

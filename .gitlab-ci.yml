@@ -1,0 +1,27 @@
+image: docker
+
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  RELEASE_TAG: $CI_REGISTRY_IMAGE:latest
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+
+before_script:
+  - docker info
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+stages:
+  - build
+
+build-image:
+  stage: build
+  script:
+    - sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk update && apk add yarn
+    - patch -p1 < build.patch
+    - yarn config set registry https://registry.npm.taobao.org/ && yarn
+    - npx parcel build src/index.html
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
