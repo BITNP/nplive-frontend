@@ -19,7 +19,7 @@ stages:
 build-image:
   stage: build
   script:
-    - sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk update && apk add yarn
+    - sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk update && apk add yarn npm
     - patch -p1 < build.patch
     - yarn config set registry https://registry.npm.taobao.org/ && yarn
     - npx parcel build src/index.html
