@@ -1,22 +1,27 @@
-# SOMETHING
+# nplive frontend
 
 ## 依赖
 
 ```bash
-yarn
+npm
 ```
 
 ## 调试
 
 ```bash
-npx parcel src/index.html
+npm run dev
 ```
 
 ## 编译
 
 ```bash
-npx parcel build src/index.html
-# 将会生成在 dist/ 下
+npm run build
+```
+
+## 预览
+
+```bash
+npm run preview
 ```
 
 ## 注意

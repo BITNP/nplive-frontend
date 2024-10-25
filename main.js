@@ -1,9 +1,8 @@
-import "../node_modules/dplayer/dist/DPlayer.min.css";
 import flvjs from "flv.js";
 import DPlayer from "dplayer";
 import Hls from "hls.js";
 
-const WS_URL = "ws://localhost:8888/websocket";
+const WS_URL = "ws://live.bitnp.net:8888/websocket";
 let ws;
 
 let _flvPlayer = null;
